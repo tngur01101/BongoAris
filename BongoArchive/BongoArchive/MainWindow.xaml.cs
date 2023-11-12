@@ -16,8 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Winforms = System.Windows.Forms;
 
-namespace BongoCat
+namespace BongoArchive
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -36,12 +37,6 @@ namespace BongoCat
         [DllImport("kernel32.dll")]
         static extern IntPtr LoadLibrary(string lpFileName);
 
-        [DllImport("user32.dll")]
-        static extern void keybd_event(uint vk, uint scan, uint falgs, uint extraInfo);//( 가상 키, 스캔 코드, DOWN(0) or UP(2), 키보드타입); 일반키보드는 타입을 0으로
-
-        [DllImport("user32.dll")]
-        static extern uint MapVirtualKey(int wCode, int wMapType);//( 변환 할 키, 변환 동작 설정);
-
         private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr LParam);
 
         const int WH_KEYBOARD_LL = 13;
@@ -49,17 +44,6 @@ namespace BongoCat
 
         private IntPtr hook = IntPtr.Zero;
         private static LowLevelKeyboardProc _hook;
-
-        const int LShift = 160;
-        const int LCtrl = 162;
-        const int TAB = 9;
-        const int CapsLock = 20;
-        const int Enter = 13;
-        const int Space = 32;
-        const int ChangeLanguage = 21;
-
-        bool inputingFlag = false;
-
 
         int currentImageNum = 0;
         BitmapImage[] catBitmapImage = new BitmapImage[4];
@@ -83,78 +67,84 @@ namespace BongoCat
                 UnhookWindowsHookEx(hook);
             };
 
-            //Imagebookmark
-            catBitmapImage[0] = new BitmapImage(new Uri("auu.png", UriKind.RelativeOrAbsolute));
-            catBitmapImage[1] = new BitmapImage(new Uri("aud.png", UriKind.RelativeOrAbsolute));
-            catBitmapImage[2] = new BitmapImage(new Uri("adu.png", UriKind.RelativeOrAbsolute));
-            catBitmapImage[3] = new BitmapImage(new Uri("add.png", UriKind.RelativeOrAbsolute));
+            //Imageinit
+            SetCharactor(0);
 
             //TimeSetting
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Tick += TimeFunction;
             timer.Start();
+            
+            //TrayIcon
+            Winforms.NotifyIcon notifyIcon = new Winforms.NotifyIcon();
+            notifyIcon.Icon = Properties.Resources.aris;
+            notifyIcon.Visible = true;
+            notifyIcon.Text = "빛이여";
+
+            Winforms.ContextMenuStrip menuStrip = new Winforms.ContextMenuStrip();
+            Winforms.ToolStripMenuItem item0=new Winforms.ToolStripMenuItem();
+            item0.Text = "종료";
+            item0.Click += delegate (object? click, EventArgs e) { this.Close(); };
+            menuStrip.Items.Add(item0);
+            Winforms.ToolStripMenuItem item1 = new Winforms.ToolStripMenuItem();
+            item1.Text = "BASIC";
+            item1.Click += delegate (object? click, EventArgs e) { SetCharactor(0); };
+            menuStrip.Items.Add(item1);
+            Winforms.ToolStripMenuItem item2 = new Winforms.ToolStripMenuItem();
+            item2.Text = "ARIS";
+            item2.Click += delegate (object? click, EventArgs e) { SetCharactor(1); };
+            menuStrip.Items.Add(item2);
+            Winforms.ToolStripMenuItem item3 = new Winforms.ToolStripMenuItem();
+            item3.Text = "KAYOKO";
+            item3.Click += delegate (object? click, EventArgs e) { SetCharactor(2); };
+            menuStrip.Items.Add(item3);
+
+
+
+            notifyIcon.ContextMenuStrip = menuStrip;
+
+            this.ShowInTaskbar = false;
+
         }
 
-        private void KeyInput(char c)
+        private void SetCharactor(int num)
         {
-            byte result = 0;
-            bool lShiftUse = false;
-            if (c == '~') { result = 192; lShiftUse = true; }
-            else if (c == '!') { result = 49; lShiftUse = true; }
-            else if (c == '@') { result = 50; lShiftUse = true; }
-            else if (c == '#') { result = 51; lShiftUse = true; }
-            else if (c == '$') { result = 52; lShiftUse = true; }
-            else if (c == '%') { result = 53; lShiftUse = true; }
-            else if (c == '^') { result = 54; lShiftUse = true; }
-            else if (c == '&') { result = 55; lShiftUse = true; }
-            else if (c == '*') { result = 56; lShiftUse = true; }
-            else if (c == '(') { result = 57; lShiftUse = true; }
-            else if (c == ')') { result = 58; lShiftUse = true; }
-            else if (c == '_') { result = 189; lShiftUse = true; }
-            else if (c == '+') { result = 187; lShiftUse = true; }
-            else if (c == '{') { result = 219; lShiftUse = true; }
-            else if (c == '}') { result = 221; lShiftUse = true; }
-            else if (c == ':') { result = 186; lShiftUse = true; }
-            else if (c == '\"') { result = 222; lShiftUse = true; }
-            else if (c == '<') { result = 188; lShiftUse = true; }
-            else if (c == '>') { result = 190; lShiftUse = true; }
-            else if (c == '?') { result = 191; lShiftUse = true; }
-            else result = (byte)GetVkCode(c);
+            //0 = basic
+            //1 = aris
+            //2 = kayoko
+            if (num == 0)
+            {
+                catBitmapImage[0] = new BitmapImage(new Uri("uu.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[1] = new BitmapImage(new Uri("ud.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[2] = new BitmapImage(new Uri("du.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[3] = new BitmapImage(new Uri("dd.png", UriKind.RelativeOrAbsolute));
+            }
+            else if (num == 1)
+            {
+                catBitmapImage[0] = new BitmapImage(new Uri("auu.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[1] = new BitmapImage(new Uri("aud.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[2] = new BitmapImage(new Uri("adu.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[3] = new BitmapImage(new Uri("add.png", UriKind.RelativeOrAbsolute));
+            }
+            else if (num == 2)
+            {
+                catBitmapImage[0] = new BitmapImage(new Uri("kayokouu.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[1] = new BitmapImage(new Uri("kayokoud.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[2] = new BitmapImage(new Uri("kayokodu.png", UriKind.RelativeOrAbsolute));
+                catBitmapImage[3] = new BitmapImage(new Uri("kayokodd.png", UriKind.RelativeOrAbsolute));
+            }
 
-            if (lShiftUse) keybd_event(LShift, 0, 0, 0);
-            keybd_event(result, 0, 0, 0);
-            keybd_event(result, 0, 2, 0);
-            if (lShiftUse) keybd_event(LShift, 0, 2, 0);
+            ChangeImageSel(0);
         }
 
-        private int GetVkCode(char a)
-        {
-            Debug.WriteLine((int)a);
-            if ((int)a >= 48 && (int)a <= 57) return (int)a;
-            else if ((int)a >= 65 && (int)a <= 90) return (int)a;
-            else if ((int)a >= 97 && (int)a <= 122) return (int)a - 32;
-            else if (a.Equals('`')) return 192;
-            else if (a.Equals('-')) return 189;
-            else if (a.Equals('=')) return 187;
-            else if (a.Equals('[')) return 219;
-            else if (a.Equals(']')) return 221;
-            else if (a.Equals(';')) return 186;
-            else if (a.Equals('\'')) return 222;
-            else if (a.Equals(',')) return 188;
-            else if (a.Equals('.')) return 190;
-            else if (a.Equals('/')) return 191;
-            return 0;
-        }
 
-        private IntPtr HookProc(int code, IntPtr wParam, IntPtr lParam)
+        private IntPtr HookProc(int code, IntPtr wParam, IntPtr lParam)//키입력 들어오면 작동하는 친구
         {
             if (code >= 0 && wParam == (IntPtr)WM_KEYDOWN)
             {
-                inputingFlag = true;
                 byte vkCode = (byte)Marshal.ReadInt32(lParam);
                 
-                inputingFlag = false;
                 ChangeImage();
 
                 //return (IntPtr)1; 키 씹기.

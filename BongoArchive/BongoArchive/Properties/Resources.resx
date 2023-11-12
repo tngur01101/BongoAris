@@ -124,10 +124,37 @@
   <data name="adu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\adu.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="aris" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\aris.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="aud" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\aud.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="auu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\auu.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\dd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="du" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\du.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kayokodd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\kayokodd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kayokodu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\kayokodu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kayokoud" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\kayokoud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kayokouu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\kayokouu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ud" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\uu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -1,14 +1,14 @@
-﻿<Window x:Class="BongoCat.MainWindow"
+﻿<Window x:Class="BongoArchive.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BongoCat"
+        xmlns:local="clr-namespace:BongoArchive"
         mc:Ignorable="d"
         Title="MainWindow" Height="200" Width="300" WindowStyle="None" AllowsTransparency="True" Opacity="0.8" Topmost="True" MouseLeftButtonDown="Window_MouseLeftButtonDown" Background="Transparent">
     <Grid>
         <Grid Width="448" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image x:Name="catImage" Source="auu.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+            <Image x:Name="catImage" Source="uu.png" HorizontalAlignment="Center" Stretch="Uniform" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

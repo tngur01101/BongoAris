@@ -7,6 +7,7 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>aris.ico</ApplicationIcon>
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+    <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -23,6 +24,14 @@
     <None Remove="aris.ico" />
     <None Remove="aud.png" />
     <None Remove="auu.png" />
+    <None Remove="dd.png" />
+    <None Remove="du.png" />
+    <None Remove="kayokodd.png" />
+    <None Remove="kayokodu.png" />
+    <None Remove="kayokoud.png" />
+    <None Remove="kayokouu.png" />
+    <None Remove="ud.png" />
+    <None Remove="uu.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +44,14 @@
     <Resource Include="aris.ico" />
     <Resource Include="aud.png" />
     <Resource Include="auu.png" />
+    <Resource Include="dd.png" />
+    <Resource Include="du.png" />
+    <Resource Include="kayokodd.png" />
+    <Resource Include="kayokodu.png" />
+    <Resource Include="kayokoud.png" />
+    <Resource Include="kayokouu.png" />
+    <Resource Include="ud.png" />
+    <Resource Include="uu.png" />
   </ItemGroup>
 
   <ItemGroup>
